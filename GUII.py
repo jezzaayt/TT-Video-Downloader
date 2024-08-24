@@ -5,18 +5,23 @@ from tkinter import *
 import tkinter as tk
 from tkinter import LabelFrame, Label, Button, StringVar, messagebox
 import main
+import webview
+
+
+size = "500x500"
+title = "TT Video Downloader"
 
 root = Tk()
 class GUII():
     
-  
+
 
     def __init__(self,root):
         self.initUI(root) 
 
     def initUI(self,root):
-        root.geometry("400x400")
-        root.title("TT Video Downloader")
+        root.geometry(size)
+        root.title(title)
 
     def RunDataBtn():
 
@@ -47,6 +52,7 @@ class GUII():
             else:
                 download.download(link)
                 
+                
                 tk.messagebox.showinfo("Succesfully Downloaded",f"Video downloaded from TT: {link}")
 
         except Exception as e:
@@ -54,6 +60,18 @@ class GUII():
             tk.messagebox.showerror("Warning",str(e) + "\n This link is invalid. Please try again with a different link")
     def PopUpWarning():
         tk.messagebox.showerror("Warning",  "Please Enter a TT URL to download")
+       
+    def ShowLink():
+        
+        link = GUII.linkText.get(1.0,"end-1c")
+
+        if link != "":
+            webview.create_window("Link",link)
+            webview.start()
+        else:
+            tk.messagebox.showerror("Warning",  "Please Enter a TT URL to view")
+
+
         
 
     text_var = StringVar()
@@ -117,5 +135,23 @@ class GUII():
                     overrelief="raised",)
 
     buttonWithData.pack(padx=20, pady=20)  
-   
+
+    buttonShowLink = Button(root, 
+                    text="Go To Video",    
+                    command=ShowLink, 
+                    anchor="center",
+                    bd=3,
+                    bg="lightgray",
+                    cursor="hand2",
+                    disabledforeground="gray",
+                    fg="black",
+                    font=("Arial", 12),
+                    height=2,
+                    highlightbackground="black",
+                    highlightcolor="green",
+                    highlightthickness=2,
+                    justify="center",
+                    overrelief="raised",)
+
+    buttonShowLink.pack(padx=20, pady=20)  
 
