@@ -7,3 +7,4 @@ README_files
 *.csv
 build
 main.spec
+dist
