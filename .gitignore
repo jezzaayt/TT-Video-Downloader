@@ -1,0 +1,9 @@
+*.pyc
+*.pyo
+__pycache__/
+README.html
+README_files
+*.mp4
+*.csv
+build
+main.spec
