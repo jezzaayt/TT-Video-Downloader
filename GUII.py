@@ -64,8 +64,12 @@ class GUII():
     def ShowLink():
         
         link = GUII.linkText.get(1.0,"end-1c")
+        # if link does not include https://www.tiktok.com/ else use ""
+        
+      
 
-        if link != "":
+
+        if link.startswith("https://www.tiktok.com/"):
             webview.create_window("Link",link)
             webview.start()
         else:
