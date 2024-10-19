@@ -1,14 +1,14 @@
 
-from tkinter import LabelFrame, Label, Button, StringVar, messagebox
 import download
 from tkinter import *
 import tkinter as tk
 from tkinter import LabelFrame, Label, Button, StringVar, messagebox
 import main
 import webview
+import os 
+import subprocess
 
-
-size = "500x500"
+size = "500x550"
 title = "TT Video Downloader"
 
 root = Tk()
@@ -76,8 +76,20 @@ class GUII():
             tk.messagebox.showerror("Warning",  "Please Enter a TT URL to view")
 
 
-        
+    def open_root_folder():
+    # Get the current working directory (root folder of the script)
+        root_folder = os.getcwd()
 
+        try:
+            # Open the folder in file explorer
+            if os.name == 'nt':  # For Windows
+                subprocess.Popen(f'explorer "{root_folder}"')
+            elif os.name == 'posix':  # For MacOS and Linux
+                subprocess.Popen(['open', root_folder] if sys.platform == 'darwin' else ['xdg-open', root_folder])
+        except Exception as e:
+            messagebox.showerror("Error", f"Could not open folder: {e}")
+
+    
     text_var = StringVar()
     text_var.set("Enter TT Link")
     label = Label(root, 
@@ -94,7 +106,8 @@ class GUII():
 
     label.pack(pady=20)
     
-
+    open_button = tk.Button(root, text="Open Root Folder", command=open_root_folder)
+    open_button.pack(pady=20)
     linkText = Text(root, height = 5)
     linkText.pack()
 
